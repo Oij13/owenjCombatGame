@@ -1,0 +1,105 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 13 10:02:33 2024
+
+@author: owen.johnson3
+"""
+
+class Character(object):
+    def __init__(self):
+        super().__init__()
+        self.name = "Anonymous"
+        self.hitPoints = 5
+        self.hitChance = 50
+        self.maxDamage = 1
+        self.armor = 1
+        
+    def printStats(self):
+            print(f"""
+    {self.name}
+        HP:         {self.hitPoints}
+        Hit Chance: {self.hitChance}
+        Max Damage: {self.maxDamage}
+        Armor:      {self.armor}
+                      
+                  """)  
+              
+    def testInt(self, value, min = 0, max = 100, default = 0):
+            """ takes in value 
+                    checks to see if it is an int between
+                    min and max.  If it is not a legal value
+                    set it to default """
+    
+            out = default
+        
+            if type(value) == int:
+                if value >= min:
+                    if value <= max:
+                        out = value 
+                    else:
+                        print("Too large")
+                else:
+                    print("Too small")
+            else:
+                print("Must be an int")
+        
+            return out        
+        
+   
+    @property
+    def name(self):
+        return self.__name
+    
+    @name.setter
+    def name(self, value):
+        self.__name = value
+        
+        
+    @property
+    def hitPoints(self):
+        return self.__hitPoints
+    
+    @hitPoints.setter
+    def hitPoints(self, value):
+        value = self.testInt(value, 0, 100, 0)
+        self.__hitPoints = value
+        
+    @property
+    def hitChance(self):
+        return self.__hitChance
+    
+    @hitChance.setter
+    def hitChance(self, value):
+        value = self.testInt(value, 0, 100, 0)
+        self.__hitChance = value
+        
+    @property
+    def maxDamage(self):
+        return self.__maxDamage
+     
+    @maxDamage.setter
+    def maxDamage(self, value):
+        value = self.testInt(value, 0, 100, 0)
+        self.__maxDamage = value
+         
+    @property
+    def armor(self):
+        return self.__armor
+     
+    @armor.setter
+    def armor(self, value):
+        value = self.testInt(value, 0, 100, 0)    
+        self.__armor = value
+    
+        
+
+        
+def main():
+    c = Character()
+    c.hitPoints = 70
+    c.printStats()
+if __name__ == "__main__":
+    main()
+    
+
+        
