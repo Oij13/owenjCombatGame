@@ -4,14 +4,14 @@ Created on Wed Mar 13 10:02:33 2024
 
 @author: owen.johnson3
 """
-
+import random
 class Character(object):
     def __init__(self):
         super().__init__()
         self.name = "Anonymous"
         self.hitPoints = 5
         self.hitChance = 50
-        self.maxDamage = 1
+        self.maxDamage = 5
         self.armor = 1
         
     def printStats(self):
@@ -91,12 +91,25 @@ class Character(object):
         value = self.testInt(value, 0, 100, 0)    
         self.__armor = value
     
-        
+    
+    
+    def hit(self):
+        if random.randint(1,100) <= self.hitChance:
+            hit = random.randint(1,self.maxDamage)
+            self.hitPoints -= hit
+            return f"""{self.name} hit {self.name} for {hit}"""
+            
+        else:
+            return f"""{self.name} missed"""
+    
+    
 
         
 def main():
     c = Character()
     c.hitPoints = 70
+    c.printStats()
+    print(c.hit())
     c.printStats()
 if __name__ == "__main__":
     main()
