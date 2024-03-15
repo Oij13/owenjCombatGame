@@ -97,12 +97,15 @@ class Character(object):
         if random.randint(1,100) <= self.hitChance:
             hit = random.randint(1,self.maxDamage)
             
-            print (f"""{self.name} hit {enemy.name} for {hit}""")
+            print (f"""{self.name} hit {enemy.name} for {hit} points""")
             hit -= enemy.armor
             if hit < 0:
                 hit = 0
             if enemy.armor > 0:
                 print(f"""but {enemy.name} absorbs {enemy.armor} points """)
+                enemy.hitPoints -= hit
+            if enemy.armor == 0:
+                print(f"{self.name} hit {enemy.name} for {hit} points")
                 enemy.hitPoints -= hit
         else:
             print (f"""{self.name} missed""")
