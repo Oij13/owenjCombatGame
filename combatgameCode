@@ -104,8 +104,8 @@ class Character(object):
             if enemy.armor > 0:
                 print(f"""but {enemy.name} absorbs {enemy.armor} points """)
                 enemy.hitPoints -= hit
-            if enemy.armor == 0:
-                print(f"{self.name} hit {enemy.name} for {hit} points")
+            elif enemy.armor == 0:
+                
                 enemy.hitPoints -= hit
         else:
             print (f"""{self.name} missed""")
