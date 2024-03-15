@@ -1,158 +1,34 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Mar 13 10:02:33 2024
+Created on Fri Mar 15 10:12:53 2024
 
 @author: owen.johnson3
 """
-import random
-class Character(object):
-    def __init__(self):
-        super().__init__()
-        self.name = "Anonymous"
-        self.hitPoints = 5
-        self.hitChance = 50
-        self.maxDamage = 5
-        self.armor = 1
-        
-    def printStats(self):
-            print(f"""
-    {self.name}
-        HP:         {self.hitPoints}
-        Hit Chance: {self.hitChance}
-        Max Damage: {self.maxDamage}
-        Armor:      {self.armor}
-                      
-                  """)  
-              
-    def testInt(self, value, min = 0, max = 100, default = 0):
-            """ takes in value 
-                    checks to see if it is an int between
-                    min and max.  If it is not a legal value
-                    set it to default """
-    
-            out = default
-        
-            if type(value) == int:
-                if value >= min:
-                    if value <= max:
-                        out = value 
-                    else:
-                        print("Too large")
-                else:
-                    print("Too small")
-            else:
-                print("Must be an int")
-        
-            return out        
-        
-   
-    @property
-    def name(self):
-        return self.__name
-    
-    @name.setter
-    def name(self, value):
-        self.__name = value
-        
-        
-    @property
-    def hitPoints(self):
-        return self.__hitPoints
-    
-    @hitPoints.setter
-    def hitPoints(self, value):
-        value = self.testInt(value, 0, 100, 0)
-        self.__hitPoints = value
-        
-    @property
-    def hitChance(self):
-        return self.__hitChance
-    
-    @hitChance.setter
-    def hitChance(self, value):
-        value = self.testInt(value, 0, 100, 0)
-        self.__hitChance = value
-        
-    @property
-    def maxDamage(self):
-        return self.__maxDamage
-     
-    @maxDamage.setter
-    def maxDamage(self, value):
-        value = self.testInt(value, 0, 100, 0)
-        self.__maxDamage = value
-         
-    @property
-    def armor(self):
-        return self.__armor
-     
-    @armor.setter
-    def armor(self, value):
-        value = self.testInt(value, 0, 100, 0)    
-        self.__armor = value
-    
-    
-    
-    def hit(self, enemy):
-        if random.randint(1,100) <= self.hitChance:
-            hit = random.randint(1,self.maxDamage)
-            
-            print (f"""{self.name} hit {enemy.name} for {hit} points""")
-            hit -= enemy.armor
-            if hit < 0:
-                hit = 0
-            if enemy.armor > 0:
-                print(f"""but {enemy.name} absorbs {enemy.armor} points """)
-                enemy.hitPoints -= hit
-            elif enemy.armor == 0:
-                
-                enemy.hitPoints -= hit
-        else:
-            print (f"""{self.name} missed""")
-    
-    
-def fight(player1, player2):
-    keepGoing = True
-    while keepGoing:
-        player1.hit(player2)
-        player2.hit(player1)
-        
-        
-        print(f"{player1.name} HP: {player1.hitPoints} ")
-        print(f"{player2.name} HP: {player2.hitPoints} ")
-        input()
 
-        if player1.hitPoints <= 0:
-            print (f"{player1.name} loses")
-            keepGoing = False
-        elif player2.hitPoints <= 0:
-            print(f"{player2.name} loses")
-            keepGoing = False
-        
+import tbc
+
 def main():
-   c = Character()
-   
-   # Example usage
-   c.name = "Player 1"
-   c.hitPoints = 10
-   c.hitChance = 70
-   c.maxDamage = 8
-   c.armor = 2
-   
-   c.printStats()
-   
-   c2 = Character()
-   c2.name = "Player 2"
-   c2.hitPoints = 8
-   c2.hitChance = 60
-   c2.maxDamage = 6
-   c2.armor = 1
-   
-   c2.printStats()
-   
-   fight(c, c2)
+    hero = tbc.Character()
+    hero.name = "Hero"
+    hero.hitPoints = 10
+    hero.hitChance = 50
+    hero.maxDamage = 5
+    hero.armor = 2
+    
+    monster = tbc.Character()
+    monster.name = "Monster"
+    monster.hitPoints = 20
+    monster.hitChance = 20
+    monster.maxDamage = 5
+    monster.armor = 0
+
+    #monster = tbc.Character("Monster", 20, 30, 5, 0)
+
+    hero.printStats()
+    monster.printStats()
+
+    input()
+    tbc.fight(hero, monster)
+
 if __name__ == "__main__":
     main()
-    
-
-        
