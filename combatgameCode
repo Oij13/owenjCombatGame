@@ -93,24 +93,61 @@ class Character(object):
     
     
     
-    def hit(self):
+    def hit(self, enemy):
         if random.randint(1,100) <= self.hitChance:
             hit = random.randint(1,self.maxDamage)
-            self.hitPoints -= hit
-            return f"""{self.name} hit {self.name} for {hit}"""
             
+            print (f"""{self.name} hit {enemy.name} for {hit}""")
+            hit -= enemy.armor
+            if hit < 0:
+                hit = 0
+            if enemy.armor > 0:
+                print(f"""but {enemy.name} absorbs {enemy.armor} points """)
+                enemy.hitPoints -= hit
         else:
-            return f"""{self.name} missed"""
+            print (f"""{self.name} missed""")
     
     
+def fight(player1, player2):
+    keepGoing = True
+    while keepGoing:
+        player1.hit(player2)
+        player2.hit(player1)
+        
+        
+        print(f"{player1.name} HP: {player1.hitPoints} ")
+        print(f"{player2.name} HP: {player2.hitPoints} ")
+        input()
 
+        if player1.hitPoints <= 0:
+            print (f"{player1.name} loses")
+            keepGoing = False
+        elif player2.hitPoints <= 0:
+            print(f"{player2.name} loses")
+            keepGoing = False
         
 def main():
-    c = Character()
-    c.hitPoints = 70
-    c.printStats()
-    print(c.hit())
-    c.printStats()
+   c = Character()
+   
+   # Example usage
+   c.name = "Player 1"
+   c.hitPoints = 10
+   c.hitChance = 70
+   c.maxDamage = 8
+   c.armor = 2
+   
+   c.printStats()
+   
+   c2 = Character()
+   c2.name = "Player 2"
+   c2.hitPoints = 8
+   c2.hitChance = 60
+   c2.maxDamage = 6
+   c2.armor = 1
+   
+   c2.printStats()
+   
+   fight(c, c2)
 if __name__ == "__main__":
     main()
     
