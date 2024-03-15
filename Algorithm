@@ -1,0 +1,158 @@
+Character class
+Each class will have:
+Hidden attributes:
+Name-Player/Enemy		str	can be whatever user wants
+Limits: Only able to be a string. Any other input would revert to anonymous
+
+Hit Points- 20/50		int	will be able to go negative before ending game
+Limits: Only integers and positive numbers. Wrong input would set to 5 default HP
+
+Hit chance- 60/30		int	the chance that the attack will hit	
+Limits: Only ints and positive numbers. Default back to 50 percent.
+	
+Max damage- 5/5		int	if attack hits, damage will be 1-5 for both parties
+Limits: Only ints and positive numbers. Default back to 1
+
+Armor- 3/0			int	amount taken off of attack for user
+Limits: Only ints and positive numbers. Default back to 0
+
+Initializer 
+
+def__init__(self):
+	super().__init__()
+	self.name = “Anonymous”
+	self.hitPoints = 5
+	self.hitChance = 50
+	self.maxDamage = 1
+	self.armor = 0
+
+
+
+Retrieve all of the hidden attributes using this format
+@ property
+Def name(self)
+	Return.self__self
+
+Set attributes value for each hidden attribute using this format
+@ name.setter
+Def name(self, value)
+	Self__name = value
+
+
+
+Written function for each property:
+
+@ name.setter
+Def name(self, value):
+	Self.__name = value
+
+@ hp.setter
+Def hp(self, value):
+	If type (value) == int:
+		If value >= 0:
+Self.__hp = value
+		Else: 
+			Print (“Health Points must be positive”)
+Self.__hp = 5
+Else:
+		print(“Health Points must be a number”)
+		Self.__hp = 5
+
+@ hitChance.setter
+Def hitChance(self, value):
+	If type (value) == int:
+		If value >= 0:
+Self.__hitChance = value
+		Else: 
+			Print (“Hit Chance must be positive”)
+Self.__hitChance = 50
+Else:
+		print(“Hit Chance must be a number”)
+		Self.__hitChance = 50
+
+
+
+
+@ maxDamage.setter
+Def maxDamage(self, value):
+	If type (value) == int:
+		If value >= 0:
+Self.__maxDamage = value
+		Else: 
+			Print (“Max Damage must be positive”)
+Self.__maxDamage = 1
+Else:
+		print(“Max Damage must be a number”)
+		Self.__maxDamage = 1
+
+
+@ armor.setter
+Def armor(self, value):
+	If type (value) == int:
+		If value >= 0:
+Self.__armor = value
+		Else: 
+			Print (“Armor must be positive”)
+Self.__armor = 1
+Else:
+		print(“Armor must be a number”)
+		Self.__armor = 1
+
+
+
+
+Def printStats():
+	Assign c to Character()
+	Use c to give each variable a def in the stats bar that correlates to them
+  Hero (name)
+    ==================
+    Hit points: 10 (self.hp)
+    Hit chance: 50 (self.hitChance)
+    Max damage: 5 (self.maxDamage)
+    Armor:      2 (self.armor)
+
+    Monster (name)
+    ==================
+    Hit points: 20 (self.hitPoints)
+    Hit chance: 30 (self.hitChance)
+    Max damage: 5 (self.maxDamage)
+    Armor:      0 (self.armor)
+
+
+Def main():
+	c = Character()
+	c.printStats()
+
+
+
+
+
+
+
+Def hit(self)
+
+	Take given number times .001 to get percentage that hit will land
+	Use that percentage to choose random number within 1- given number for max damage
+	
+ def hit(self):
+        if random.randint(1,100) <= self.hitChance:
+            hit = random.randint(1,self.maxDamage)
+            self.hitPoints -= hit
+            return f"""{self.name} hit {self.name} for {hit}"""
+            
+        else:
+            return f"""{self.name} missed"""
+
+
+
+Fight func
+
+All within a while loop:
+
+	Have each player hit each other
+	
+	Check if either player is dead  HP<=0
+	If no, continue keepGoing
+	If yes, stop keepGoing and declare player still alive the winner
+
+HP will be allowed to go negative
